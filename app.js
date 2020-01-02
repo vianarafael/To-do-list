@@ -21,7 +21,8 @@ const UIController = (function() {
         inputField: document.querySelector('.input__field'),
         text: document.querySelector('.text__input'),
         btn: document.querySelector('.add__btn'),
-        container: document.querySelector('.container')
+        container: document.querySelector('.container'),
+        remove: document.querySelector('.item')
     }
     return {
         DOM,
@@ -32,11 +33,10 @@ const UIController = (function() {
         displayListItem: function(post, id) {
             let html, newHtml
             
-            html = '<div class="item__container><div class="item" id="%id%">%content%</div><button>X</button></div>'
+            html = '<div class="item__container"><div class="item" id="%id%">%content%<button>X</button></div></div>'
 
             newHtml = html.replace('%content%', post)
             newHtml = newHtml.replace('%id%', id)
-            console.log(newHtml)
             DOM.container.insertAdjacentHTML('beforeend', newHtml)
 
         }
@@ -66,7 +66,12 @@ const controller = (function(UICtrl, dataCtrl) {
 
     // delete item
     UICtrl.DOM.container.addEventListener('click', function(e) {
-        console.log(e)
+        const el = e.target.parentNode
+
+        if (el.id) {
+            console.log(el.parentNode.parentNode)
+            el.parentNode.removeChild(el)
+        }
     })
 
 
