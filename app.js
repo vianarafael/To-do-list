@@ -33,7 +33,7 @@ const UIController = (function() {
         displayListItem: function(post, id) {
             let html, newHtml
             
-            html = '<div class="item__container"><div class="item" id="%id%">%content%<button>X</button></div></div>'
+            html = '<div class="item__container" draggable="true"><div class="item" id="%id%">%content%<button>X</button></div></div>'
 
             newHtml = html.replace('%content%', post)
             newHtml = newHtml.replace('%id%', id)
@@ -46,21 +46,33 @@ const UIController = (function() {
 const controller = (function(UICtrl, dataCtrl) {
     console.log('working')
     let id = 0
-    // get the value from the input field
-    UICtrl.DOM.btn.addEventListener('click', function() {
+
+    function addItem() {
+        // get the value from the input field
         let value = UICtrl.DOM.text.value
+            if (value !== '') {
+            // save the value data 
+            dataCtrl.addPost(value, id)
 
-        // save the value data 
-        dataCtrl.addPost(value, id)
+
+            // clear input
+            UICtrl.clearInput()
+
+            // display list
+            UICtrl.displayListItem(value, id)
+
+            id++
+        }
+
+    }
 
 
-        // clear input
-        UICtrl.clearInput()
+    UICtrl.DOM.btn.addEventListener('click', addItem)
 
-        // display list
-        UICtrl.displayListItem(value, id)
-
-        id++
+    document.addEventListener('keypress', function (e) {
+        if (e.keyCode === 13) {
+            addItem()
+        }
 
     })
 
@@ -69,11 +81,11 @@ const controller = (function(UICtrl, dataCtrl) {
         const el = e.target.parentNode
 
         if (el.id) {
-            console.log(el.parentNode.parentNode)
             el.parentNode.removeChild(el)
         }
     })
 
+    // drag and drop
 
 })(UIController, dataController)
 
