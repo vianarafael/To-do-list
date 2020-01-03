@@ -1,3 +1,16 @@
 body {
     background-color: tomato;
 }
+
+.up {
+    text-align: center;
+}
+
+.item__container {
+    margin: 6px 200px;
+    cursor: pointer;
+}
+
+.item__container button {
+    float: right;
+}

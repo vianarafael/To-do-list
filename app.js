@@ -22,6 +22,7 @@ const UIController = (function() {
         text: document.querySelector('.text__input'),
         btn: document.querySelector('.add__btn'),
         container: document.querySelector('.container'),
+        // this is unnecessary
         remove: document.querySelector('.item')
     }
     return {
@@ -33,7 +34,7 @@ const UIController = (function() {
         displayListItem: function(post, id) {
             let html, newHtml
             
-            html = '<div class="item__container" draggable="true"><div class="item" id="%id%">%content%<button>X</button></div></div>'
+            html = '<div class="item__container"><div class="item" draggable="true" id="%id%">%content%<button>X</button></div></div>'
 
             newHtml = html.replace('%content%', post)
             newHtml = newHtml.replace('%id%', id)
@@ -85,7 +86,24 @@ const controller = (function(UICtrl, dataCtrl) {
         }
     })
 
-    // drag and drop
+    // drag and drop - I am still trying to figure that out
+
+    // UICtrl.DOM.container.addEventListener('dragstart', dragStart)
+    // UICtrl.DOM.container.addEventListener('dragend', dragDrop)
+    // UICtrl.DOM.container.addEventListener('drop', dragDrop)
+
+    // function dragStart() {
+    //     console.log('start')
+    // }
+
+    // function dragDrop() {
+    //     console.log(this.childNodes[1])
+    //     console.log(UICtrl.DOM.container)
+    //     UICtrl.DOM.container.append(this.childNodes[1])
+    // }
+
+
+
 
 })(UIController, dataController)
 
